@@ -1,65 +1,597 @@
-import Image from "next/image";
+'use client';
 
+import { useState } from 'react';
+import { useTypingEffect } from '@/hooks/useTyping';
+import { useFadeIn } from '@/hooks/useFadeIn';
+
+// ─── color / font tokens ────────────────────────────────────────────────────
+const BG = '#111315';
+const TEXT_PRIMARY = '#e5e7eb';
+const TEXT_SECONDARY = '#9ca3af';
+const ACCENT = '#22c55e';
+const CARD_BG = '#16181c';
+const BORDER = 'rgba(255,255,255,0.06)';
+
+const mono: React.CSSProperties = {
+  fontFamily: "'VT323', monospace",
+  letterSpacing: '0.02em',
+};
+const sans: React.CSSProperties = {
+  fontFamily: "'Inter', sans-serif",
+};
+
+// ─── data ────────────────────────────────────────────────────────────────────
+const TYPED_WORDS = ['world.', 'systems.', 'future.', 'projects.', 'rules.'];
+
+const PROJECTS = [
+  {
+    id: 1,
+    name: 'Tellnex',
+    description: 'asistent AI conversational. raspunsuri rapide, interfata simpla, experienta nativa.',
+    tags: ['AI', 'conversational'],
+    href: 'https://tellnex.site',
+  },
+];
+
+// ─── components ──────────────────────────────────────────────────────────────
+
+
+
+function Hero() {
+  const typedWord = useTypingEffect(TYPED_WORDS, 85, 50, 1900);
+
+  return (
+    <section
+      id="hero"
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '120px 24px 80px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* subtle grid */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
+            linear-gradient(rgba(34,197,94,0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(34,197,94,0.025) 1px, transparent 1px)
+          `,
+          backgroundSize: '64px 64px',
+          pointerEvents: 'none',
+        }}
+      />
+      {/* radial fade center */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: `radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, ${BG} 100%)`,
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <div
+          style={{
+            ...mono,
+            fontSize: 'clamp(72px, 14vw, 140px)',
+            color: TEXT_PRIMARY,
+            lineHeight: 1,
+            marginBottom: '4px',
+            opacity: 0,
+            animation: 'fadeSlideUp 0.8s ease 0.1s forwards',
+          }}
+        >
+          nexo
+        </div>
+
+        <div
+          style={{
+            ...mono,
+            fontSize: 'clamp(38px, 7vw, 72px)',
+            color: TEXT_SECONDARY,
+            lineHeight: 1.1,
+            marginBottom: '2px',
+            opacity: 0,
+            animation: 'fadeSlideUp 0.8s ease 0.35s forwards',
+          }}
+        >
+          builds the
+        </div>
+
+        <div
+          style={{
+            ...mono,
+            fontSize: 'clamp(38px, 7vw, 72px)',
+            color: ACCENT,
+            lineHeight: 1.1,
+            marginBottom: '64px',
+            minHeight: 'clamp(46px, 8.5vw, 86px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: 0,
+            animation: 'fadeSlideUp 0.8s ease 0.55s forwards',
+          }}
+        >
+          {typedWord}
+          <span
+            style={{
+              display: 'inline-block',
+              width: '2px',
+              height: '0.85em',
+              background: ACCENT,
+              marginLeft: '3px',
+              animation: 'blink 1s step-end infinite',
+              borderRadius: '1px',
+              verticalAlign: 'middle',
+            }}
+          />
+        </div>
+
+        <p
+          style={{
+            ...sans,
+            color: TEXT_SECONDARY,
+            fontSize: '13px',
+            letterSpacing: '0.18em',
+            textTransform: 'lowercase',
+            opacity: 0,
+            animation: 'fadeSlideUp 0.8s ease 0.8s forwards',
+          }}
+        >
+          pagina mea de prezentare. finally here.
+        </p>
+
+        <div
+          style={{
+            marginTop: '80px',
+            opacity: 0,
+            animation: 'fadeSlideUp 0.8s ease 1.1s forwards',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <div
+            style={{
+              width: '1px',
+              height: '48px',
+              background: `linear-gradient(to bottom, transparent, ${TEXT_SECONDARY})`,
+              opacity: 0.3,
+              animation: 'pulseY 2.4s ease-in-out infinite',
+            }}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({
+  project,
+}: {
+  project: { id: number; name: string; description: string; tags: string[]; href: string };
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <a
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'block',
+        textDecoration: 'none',
+        background: CARD_BG,
+        border: `1px solid ${hovered ? 'rgba(34,197,94,0.18)' : BORDER}`,
+        borderRadius: '8px',
+        padding: '36px 40px',
+        cursor: 'pointer',
+        transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
+        boxShadow: hovered
+          ? '0 0 32px rgba(34,197,94,0.07), 0 8px 32px rgba(0,0,0,0.3)'
+          : '0 4px 24px rgba(0,0,0,0.2)',
+        transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          justifyContent: 'space-between',
+          marginBottom: '16px',
+        }}
+      >
+        <span
+          style={{
+            ...mono,
+            fontSize: '28px',
+            color: hovered ? TEXT_PRIMARY : TEXT_SECONDARY,
+            transition: 'color 0.3s ease',
+            letterSpacing: '0.04em',
+          }}
+        >
+          {project.name}
+        </span>
+        <span
+          style={{
+            ...sans,
+            fontSize: '13px',
+            color: hovered ? ACCENT : 'transparent',
+            transition: 'color 0.3s ease',
+            letterSpacing: '0.06em',
+          }}
+        >
+          →
+        </span>
+      </div>
+
+      <p
+        style={{
+          ...sans,
+          color: TEXT_SECONDARY,
+          fontSize: '14px',
+          lineHeight: 1.7,
+          marginBottom: '24px',
+        }}
+      >
+        {project.description}
+      </p>
+
+      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+        {project.tags.map((tag) => (
+          <span
+            key={tag}
+            style={{
+              ...sans,
+              fontSize: '11px',
+              color: hovered ? ACCENT : TEXT_SECONDARY,
+              letterSpacing: '0.12em',
+              textTransform: 'lowercase',
+              padding: '3px 10px',
+              border: `1px solid ${hovered ? 'rgba(34,197,94,0.25)' : BORDER}`,
+              borderRadius: '3px',
+              transition: 'color 0.3s ease, border-color 0.3s ease',
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </a>
+  );
+}
+
+function Projects() {
+  const { ref, isVisible } = useFadeIn();
+
+  return (
+    <section
+      id="projects"
+      ref={ref as React.RefObject<HTMLElement>}
+      style={{
+        padding: '120px 24px',
+        maxWidth: '860px',
+        margin: '0 auto',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(32px)',
+        transition: 'opacity 0.8s ease, transform 0.8s ease',
+      }}
+    >
+      <div style={{ marginBottom: '64px' }}>
+        <p
+          style={{
+            ...mono,
+            fontSize: '15px',
+            color: ACCENT,
+            letterSpacing: '0.1em',
+            marginBottom: '12px',
+          }}
+        >
+          // projects
+        </p>
+        <h2
+          style={{
+            ...mono,
+            fontSize: 'clamp(36px, 5vw, 54px)',
+            color: TEXT_PRIMARY,
+            lineHeight: 1,
+            fontWeight: 'normal',
+          }}
+        >
+          selected work.
+        </h2>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        {PROJECTS.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
+
+      {/* more projects soon */}
+      <p
+        style={{
+          ...mono,
+          color: TEXT_SECONDARY,
+          fontSize: '16px',
+          letterSpacing: '0.08em',
+          marginTop: '40px',
+          opacity: 0.5,
+        }}
+      >
+        more projects soon.
+      </p>
+    </section>
+  );
+}
+
+function About() {
+  const { ref, isVisible } = useFadeIn();
+
+  return (
+    <section
+      id="about"
+      ref={ref as React.RefObject<HTMLElement>}
+      style={{
+        padding: '120px 24px',
+        maxWidth: '860px',
+        margin: '0 auto',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(32px)',
+        transition: 'opacity 0.8s ease, transform 0.8s ease',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          height: '1px',
+          background: BORDER,
+          marginBottom: '80px',
+        }}
+      />
+
+      <p
+        style={{
+          ...mono,
+          fontSize: '15px',
+          color: ACCENT,
+          letterSpacing: '0.1em',
+          marginBottom: '12px',
+        }}
+      >
+        // about
+      </p>
+
+      <h2
+        style={{
+          ...mono,
+          fontSize: 'clamp(36px, 5vw, 54px)',
+          color: TEXT_PRIMARY,
+          lineHeight: 1,
+          fontWeight: 'normal',
+          marginBottom: '48px',
+        }}
+      >
+        who is nexo?
+      </h2>
+
+      <div
+        style={{
+          maxWidth: '480px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '18px',
+        }}
+      >
+        <p style={{ ...sans, color: TEXT_PRIMARY, fontSize: '17px', lineHeight: 1.75 }}>
+          i build systems that work.
+        </p>
+        <p style={{ ...sans, color: TEXT_SECONDARY, fontSize: '15px', lineHeight: 1.75 }}>
+          vreau sa construiesc cat mai multe lucruri utile. simple as that.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  const { ref, isVisible } = useFadeIn();
+  const [linkHovered, setLinkHovered] = useState(false);
+
+  return (
+    <section
+      id="contact"
+      ref={ref as React.RefObject<HTMLElement>}
+      style={{
+        padding: '120px 24px',
+        maxWidth: '860px',
+        margin: '0 auto',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(32px)',
+        transition: 'opacity 0.8s ease, transform 0.8s ease',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          height: '1px',
+          background: BORDER,
+          marginBottom: '80px',
+        }}
+      />
+
+      <p
+        style={{
+          ...mono,
+          fontSize: '15px',
+          color: ACCENT,
+          letterSpacing: '0.1em',
+          marginBottom: '12px',
+        }}
+      >
+        // get in touch
+      </p>
+
+      <h2
+        style={{
+          ...mono,
+          fontSize: 'clamp(36px, 5vw, 54px)',
+          color: TEXT_PRIMARY,
+          lineHeight: 1,
+          fontWeight: 'normal',
+          marginBottom: '52px',
+        }}
+      >
+        let&apos;s talk.
+      </h2>
+
+      <a
+        href="https://instagram.com/nexo.7x"
+        target="_blank"
+        rel="noopener noreferrer"
+        onMouseEnter={() => setLinkHovered(true)}
+        onMouseLeave={() => setLinkHovered(false)}
+        style={{
+          ...sans,
+          color: linkHovered ? ACCENT : TEXT_PRIMARY,
+          fontSize: '22px',
+          textDecoration: 'none',
+          transition: 'color 0.25s ease',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '12px',
+          letterSpacing: '0.02em',
+        }}
+      >
+        <span
+          style={{
+            display: 'inline-block',
+            transform: linkHovered ? 'translateX(6px)' : 'translateX(0)',
+            transition: 'transform 0.25s ease',
+          }}
+        >
+          →
+        </span>
+        @nexo
+      </a>
+
+      <p
+        style={{
+          ...sans,
+          color: TEXT_SECONDARY,
+          fontSize: '13px',
+          letterSpacing: '0.12em',
+          marginTop: '28px',
+        }}
+      >
+        open to new ideas.
+      </p>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer
+      style={{
+        padding: '40px 24px',
+        maxWidth: '860px',
+        margin: '0 auto',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          height: '1px',
+          background: BORDER,
+          marginBottom: '32px',
+        }}
+      />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <span style={{ ...mono, color: TEXT_SECONDARY, fontSize: '14px', letterSpacing: '0.06em' }}>
+          nexo © 2026
+        </span>
+        <span
+          style={{
+            ...sans,
+            color: `${TEXT_SECONDARY}55`,
+            fontSize: '11px',
+            letterSpacing: '0.1em',
+          }}
+        >
+          built with intention.
+        </span>
+      </div>
+    </footer>
+  );
+}
+
+// ─── root ─────────────────────────────────────────────────────────────────────
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500&display=swap');
+
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
+        }
+        @keyframes pulseY {
+          0%, 100% { opacity: 0.3; transform: scaleY(1); }
+          50%       { opacity: 0.6; transform: scaleY(1.15); }
+        }
+        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        ::selection { background: rgba(34,197,94,0.22); color: #e5e7eb; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #111315; }
+        ::-webkit-scrollbar-thumb { background: #2a2d30; border-radius: 2px; }
+      `}</style>
+
+      <div
+        style={{
+          background: BG,
+          color: TEXT_PRIMARY,
+          minHeight: '100vh',
+          fontFamily: "'Inter', sans-serif",
+          overflowX: 'hidden',
+        }}
+      >
+       
+        <Hero />
+        <div style={{ width: '100%' }}>
+          <Projects />
+          <About />
+          <Contact />
+          <Footer />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </>
   );
 }

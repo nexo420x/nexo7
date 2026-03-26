@@ -6,6 +6,12 @@ import  Link  from "next/link";
 
 const TYPING_WORDS = ["projects.", "systems.", "work.", "tellnex.", "ai.", "tools."];
 
+export const metadata = {
+  title: "nexo projects — tellnex & more",
+  description:
+    "explore nexo projects. including tellnex — conversational AI and system architecture. more soon.",
+};
+
 function useTypingAnimation(words: string[]) {
   const [displayText, setDisplayText] = useState("");
   const [wordIndex, setWordIndex] = useState(0);

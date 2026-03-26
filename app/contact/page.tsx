@@ -14,6 +14,12 @@ import {
   sans,
 } from '../contact/tokens';
 
+export const metadata = {
+  title: "nexo contact — get in touch",
+  description:
+    "contact nexo for collaborations, projects or ideas. direct, simple, fast.",
+};
+
 const TYPED_WORDS = [
   'contact.',
   'email.',

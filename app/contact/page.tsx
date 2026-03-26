@@ -1,4 +1,4 @@
-
+"use client"
 
 import { useState, FormEvent } from 'react';
 import { useTypingEffect } from '../contact/useTyping';
@@ -14,11 +14,7 @@ import {
   sans,
 } from '../contact/tokens';
 
-export const metadata = {
-  title: "nexo contact — get in touch",
-  description:
-    "contact nexo for collaborations, projects or ideas. direct, simple, fast.",
-};
+
 
 const TYPED_WORDS = [
   'contact.',

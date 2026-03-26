@@ -16,9 +16,45 @@ const vt323 = VT323({
 })
 
 export const metadata: Metadata = {
-  title: 'nexo - web',
-  description: 'nexo official website - open line, open mind.',
-  generator: 'v0.app',
+  metadataBase: new URL("https://nexo7.site"),
+
+  title: {
+    default: "nexo — systems, projects, execution",
+    template: "%s | nexo",
+  },
+
+  description:
+    "nexo builds real systems. projects, AI and execution. no noise. just results.",
+
+  applicationName: "nexo",
+
+  keywords: [
+    "nexo",
+    "nexo systems",
+    "nexo projects",
+    "developer portfolio",
+    "AI projects",
+    "next.js developer",
+    "modern web apps",
+    "software builder",
+    "web systems",
+  ],
+
+  authors: [{ name: "nexo" }],
+
+  openGraph: {
+    title: "nexo — systems, execution",
+    description: "no noise. just execution.",
+    url: "https://nexo7.site",
+    siteName: "nexo",
+    type: "website",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
   icons: {
     icon: [
       {

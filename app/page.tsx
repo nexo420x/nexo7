@@ -1,13 +1,9 @@
-
+'use client';
 import { useState } from 'react';
 import { useTypingEffect } from '@/hooks/useTyping';
 import { useFadeIn } from '@/hooks/useFadeIn';
 
-export const metadata = {
-  title: "nexo - presentation page",
-  description:
-    "nexo builds everything. presentation page of all projects",
-};
+
 
 // ─── color / font tokens ────────────────────────────────────────────────────
 const BG = '#111315';

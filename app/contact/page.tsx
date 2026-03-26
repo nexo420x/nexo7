@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useState, FormEvent } from 'react';
 import { useTypingEffect } from '../contact/useTyping';

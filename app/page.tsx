@@ -32,6 +32,13 @@ const PROJECTS = [
     tags: ['AI', 'conversational'],
     href: 'https://tellnex.site',
   },
+  {
+    id: 2,
+    name: 'Reznex',
+    description: 'hub si comunitate pentru pasionatii de electronica si embedded. gazduire de proiecte iot, scheme hardware detaliate, liste de componente interactive si cod sursa.',
+    tags: ['Next.js', 'Supabase', 'Tailwind', 'IoT', 'Hardware'],
+    href: 'https://reznex.ro', 
+  },
 ];
 
 // ─── components ──────────────────────────────────────────────────────────────
@@ -314,7 +321,7 @@ function Projects() {
             fontWeight: 'normal',
           }}
         >
-          selected work.
+          my drops.
         </h2>
       </div>
 
@@ -541,7 +548,7 @@ function Footer() {
             letterSpacing: '0.1em',
           }}
         >
-          built with intention.
+          nexo label
         </span>
       </div>
     </footer>

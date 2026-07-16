@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import  Link  from "next/link";
 
-const TYPING_WORDS = ["projects.", "systems.", "work.", "tellnex.", "ai.", "tools."];
+const TYPING_WORDS = ["projects.", "systems.", "work.", "tellnex.", "reznex.", "iot.", "tools."];
 
 
 
@@ -63,7 +63,8 @@ const fadeUp = {
   }
 };
 
-const terminalBlocks = [
+// Terminal data pentru Tellnex[cite: 3]
+const tellnexTerminal = [
   {
     cmd: "$ stack",
     lines: ["next.js", "typescript", "node.js", "api integrations"],
@@ -79,6 +80,31 @@ const terminalBlocks = [
       "automation flows",
       "real-time responses",
       "system integration ready",
+    ],
+  },
+];
+
+// Terminal data pentru Reznex[cite: 3]
+const reznexTerminal = [
+  {
+    cmd: "$ stack",
+    lines: ["next.js 14", "supabase (db, auth, storage)", "tailwind css", "postgresql"],
+  },
+  {
+    cmd: "$ hardware docs",
+    lines: [
+      "interactive bom tables",
+      "schematics / diagram renderers",
+      "gerber file dynamic download",
+      "cloner-ready source code integration",
+    ],
+  },
+  {
+    cmd: "$ infrastructure",
+    lines: [
+      "slug-based clean routing",
+      "automated malware / virus checking on file uploads",
+      "rls security policies",
     ],
   },
 ];
@@ -196,7 +222,7 @@ export default function ProjectsPage() {
             textTransform: "lowercase",
           }}
         >
-          aici nu stiu ce sa pun. imagineaza-ti tu ca e ceva aici, utilizatorule.
+          proiecte concepute si construite de la zero. de la inteligenta artificiala la hardware.
         </motion.p>
 
         {/* Scroll nudge */}
@@ -216,12 +242,12 @@ export default function ProjectsPage() {
         </motion.div>
       </section>
 
-      {/* ── PROJECT BLOCK ──────────────────────────── */}
+      {/* ── PROJECT 001: TELLNEX ───────────────────── */}
       <section
         style={{
           maxWidth: "900px",
           margin: "0 auto",
-          padding: "6rem 2rem",
+          padding: "6rem 2rem 4rem",
         }}
       >
         {/* Label */}
@@ -323,7 +349,7 @@ export default function ProjectsPage() {
               tellnex is an ai-powered conversational system built for real-time interaction.
               it focuses on automation and scalable communication designed to integrate
               seamlessly into modern digital products and infrastructure. 
-              mai pe scurt. un AI pe care il intrebi si iti raspunde
+              mai pe scurt. un AI pe care il intrebi si iti raspunde.
             </p>
 
             {/* Status lines */}
@@ -370,8 +396,8 @@ export default function ProjectsPage() {
               fontFamily: "'VT323', monospace",
             }}
           >
-            {terminalBlocks.map((block, bi) => (
-              <div key={bi} style={{ marginBottom: bi < terminalBlocks.length - 1 ? "1.5rem" : 0 }}>
+            {tellnexTerminal.map((block, bi) => (
+              <div key={bi} style={{ marginBottom: bi < tellnexTerminal.length - 1 ? "1.5rem" : 0 }}>
                 <p
                   style={{
                     margin: "0 0 0.4rem 0",
@@ -400,7 +426,7 @@ export default function ProjectsPage() {
           </motion.div>
         </div>
 
-        {/* ── ACTION SECTION ────────────────────────── */}
+        {/* Action Buttons */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -416,6 +442,238 @@ export default function ProjectsPage() {
         >
           <a
             href="https://tellnex.site/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.8rem",
+              letterSpacing: "0.14em",
+              color: "#111315",
+              background: "#22c55e",
+              padding: "0.8rem 2rem",
+              textDecoration: "none",
+              borderRadius: "3px",
+              transition: "opacity 0.2s ease, transform 0.2s ease",
+              display: "inline-block",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.opacity = "0.85";
+              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.opacity = "1";
+              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+            }}
+          >
+            → view project
+          </a>
+        </motion.div>
+      </section>
+
+      {/* ── PROJECT 002: REZNEX ───────────────────── */}
+      <section
+        style={{
+          maxWidth: "900px",
+          margin: "0 auto",
+          padding: "4rem 2rem 6rem",
+          borderTop: "1px solid rgba(255,255,255,0.03)"
+        }}
+      >
+        {/* Label */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0}
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.72rem",
+            letterSpacing: "0.2em",
+            color: "#22c55e",
+            opacity: 0.7,
+            marginBottom: "1.5rem",
+          }}
+        >
+          // 002 — project
+        </motion.p>
+
+        {/* Project title */}
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0.1}
+          style={{
+            fontFamily: "'VT323', monospace",
+            fontSize: "clamp(3.5rem, 10vw, 7rem)",
+            color: "#e5e7eb",
+            margin: "0 0 0.5rem 0",
+            letterSpacing: "0.04em",
+            lineHeight: 1,
+          }}
+        >
+          reznex
+        </motion.h2>
+
+        {/* Tagline */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0.18}
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.85rem",
+            letterSpacing: "0.14em",
+            color: "#22c55e",
+            marginBottom: "2.5rem",
+          }}
+        >
+          hardware & iot collaboration hub.
+        </motion.p>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0, originX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            height: "1px",
+            background: "linear-gradient(90deg, #22c55e22, transparent)",
+            marginBottom: "2.5rem",
+          }}
+        />
+
+        {/* Description + Terminal grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "3rem",
+            alignItems: "start",
+          }}
+          className="project-grid"
+        >
+          {/* Description */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.25}
+          >
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.9rem",
+                lineHeight: 1.8,
+                color: "#9ca3af",
+                margin: 0,
+              }}
+            >
+              reznex is a modern portal designed as an open-source hub for physical computing
+              enthusiasts, makers, and electronic engineers in romania. it allows users to discover,
+              document, and share projects based on arduino, esp32, or stm32.
+              features deep technical indexing, dynamic bill of materials (bom), secure scheme uploads, 
+              and direct assembly code integrations.
+            </p>
+
+            {/* Status lines */}
+            <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+              {[
+                "// status: fully operational.",
+                "// slug routing database active.",
+                "// version: v1.1.4",
+              ].map((line, i) => (
+                <motion.p
+                  key={i}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  custom={0.3 + i * 0.08}
+                  style={{
+                    fontFamily: "'VT323', monospace",
+                    fontSize: "1rem",
+                    color: "#22c55e",
+                    opacity: 0.35,
+                    margin: 0,
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  {line}
+                </motion.p>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Terminal block */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.3}
+            style={{
+              background: "#0d0f10",
+              border: "1px solid rgba(34,197,94,0.12)",
+              borderRadius: "6px",
+              padding: "1.75rem 2rem",
+              fontFamily: "'VT323', monospace",
+            }}
+          >
+            {reznexTerminal.map((block, bi) => (
+              <div key={bi} style={{ marginBottom: bi < reznexTerminal.length - 1 ? "1.5rem" : 0 }}>
+                <p
+                  style={{
+                    margin: "0 0 0.4rem 0",
+                    color: "#22c55e",
+                    fontSize: "1.1rem",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  {block.cmd}
+                </p>
+                {block.lines.map((line, li) => (
+                  <p
+                    key={li}
+                    style={{
+                      margin: "0 0 0.2rem 1.25rem",
+                      color: "#6b7280",
+                      fontSize: "1rem",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Action Buttons */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0.4}
+          style={{
+            marginTop: "4rem",
+            display: "flex",
+            gap: "1.5rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <a
+            href="https://reznex.ro/" 
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "0.8rem",
@@ -503,7 +761,7 @@ export default function ProjectsPage() {
             color: "#374151",
           }}
         >
-          built with intent.
+          nexo label.
         </span>
       </footer>
 

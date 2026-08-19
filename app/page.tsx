@@ -599,6 +599,8 @@ function Contact() {
   );
 }
 
+import Link from "next/link";
+
 function Footer() {
   return (
     <footer
@@ -623,11 +625,46 @@ function Footer() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px',
         }}
       >
         <span style={{ ...mono, color: TEXT_SECONDARY, fontSize: '14px', letterSpacing: '0.06em' }}>
-          nexo © 2026 // 4:20
+          nexo © 2026
         </span>
+
+        {/* Link-uri Legal */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <Link
+            href="/terms"
+            style={{
+              ...mono,
+              color: TEXT_SECONDARY,
+              fontSize: '13px',
+              letterSpacing: '0.06em',
+              textDecoration: 'none',
+              transition: 'color 0.2s ease',
+            }}
+            className="footer-link"
+          >
+            // terms
+          </Link>
+          <Link
+            href="/privacy"
+            style={{
+              ...mono,
+              color: TEXT_SECONDARY,
+              fontSize: '13px',
+              letterSpacing: '0.06em',
+              textDecoration: 'none',
+              transition: 'color 0.2s ease',
+            }}
+            className="footer-link"
+          >
+            // privacy
+          </Link>
+        </div>
+
         <span
           style={{
             ...sans,
@@ -639,6 +676,12 @@ function Footer() {
           nexo label
         </span>
       </div>
+
+      <style>{`
+        .footer-link:hover {
+          color: #22c55e !important;
+        }
+      `}</style>
     </footer>
   );
 }

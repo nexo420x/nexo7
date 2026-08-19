@@ -554,17 +554,58 @@ function ContactForm() {
 }
 
 // ─── Footer ──────────────────────────────────────────────────────────────────
+import Link from "next/link";
+
 function Footer() {
   return (
     <footer style={{ padding: "2.5rem 2rem", maxWidth: "900px", margin: "0 auto", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
         <span style={{ fontFamily: "'VT323', monospace", color: "#9ca3af", fontSize: "1.1rem", letterSpacing: "0.06em" }}>
-          nexo © 2026 // 4:20
+          nexo © 2026
         </span>
+
+        {/* Link-uri Legal */}
+        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <Link
+            href="/terms"
+            className="footer-link"
+            style={{
+              fontFamily: "'VT323', monospace",
+              color: "#9ca3af",
+              fontSize: "1.1rem",
+              letterSpacing: "0.06em",
+              textDecoration: "none",
+              transition: "color 0.2s ease",
+            }}
+          >
+            // terms
+          </Link>
+          <Link
+            href="/privacy"
+            className="footer-link"
+            style={{
+              fontFamily: "'VT323', monospace",
+              color: "#9ca3af",
+              fontSize: "1.1rem",
+              letterSpacing: "0.06em",
+              textDecoration: "none",
+              transition: "color 0.2s ease",
+            }}
+          >
+            // privacy
+          </Link>
+        </div>
+
         <span style={{ fontFamily: "'Inter', sans-serif", color: "#4b5563", fontSize: "0.72rem", letterSpacing: "0.16em" }}>
           nexo label.
         </span>
       </div>
+
+      <style>{`
+        .footer-link:hover {
+          color: #22c55e !important;
+        }
+      `}</style>
     </footer>
   );
 }

@@ -742,7 +742,7 @@ export default function ProjectsPage() {
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
-            gap: "0.5rem",
+            gap: "1rem",
           }}
         >
           <span
@@ -753,8 +753,41 @@ export default function ProjectsPage() {
               letterSpacing: "0.06em",
             }}
           >
-            nexo © 2026 // 4:20
+            nexo © 2026
           </span>
+
+          {/* Link-uri Legal */}
+          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            <Link
+              href="/terms"
+              className="footer-link"
+              style={{
+                fontFamily: "'VT323', monospace",
+                color: "#9ca3af",
+                fontSize: "1.1rem",
+                letterSpacing: "0.06em",
+                textDecoration: "none",
+                transition: "color 0.2s ease",
+              }}
+            >
+              // terms
+            </Link>
+            <Link
+              href="/privacy"
+              className="footer-link"
+              style={{
+                fontFamily: "'VT323', monospace",
+                color: "#9ca3af",
+                fontSize: "1.1rem",
+                letterSpacing: "0.06em",
+                textDecoration: "none",
+                transition: "color 0.2s ease",
+              }}
+            >
+              // privacy
+            </Link>
+          </div>
+
           <span
             style={{
               fontFamily: "'Inter', sans-serif",
@@ -778,6 +811,10 @@ export default function ProjectsPage() {
           0% { transform: translateY(0px) rotate(360deg); }
           50% { transform: translateY(30px) rotate(180deg); }
           100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .footer-link:hover {
+          color: #22c55e !important;
         }
 
         .btn-primary {

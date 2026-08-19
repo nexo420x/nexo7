@@ -1,9 +1,8 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTypingEffect } from '@/hooks/useTyping';
 import { useFadeIn } from '@/hooks/useFadeIn';
-
-
 
 // ─── color / font tokens ────────────────────────────────────────────────────
 const BG = '#111315';
@@ -41,9 +40,83 @@ const PROJECTS = [
   },
 ];
 
+// ─── 420 Background Component ────────────────────────────────────────────────
+
+function FloatingLeavesBackground() {
+  return (
+    <div
+      aria-hidden
+      style={{
+        position: 'fixed',
+        inset: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+        zIndex: 0,
+      }}
+    >
+      {/* Frunză 1 - Stânga sus */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '12%',
+          left: '4%',
+          animation: 'rotateAndFloat1 30s linear infinite',
+          filter: 'invert(52%) sepia(87%) saturate(420%) hue-rotate(85deg) brightness(110%) drop-shadow(0 0 15px rgba(34,197,94,0.3))',
+          opacity: 0.25,
+        }}
+      >
+        <Image
+          src="/cannabis.svg"
+          alt="cannabis leaf"
+          width={220}
+          height={220}
+          priority
+        />
+      </div>
+
+      {/* Frunză 2 - Dreapta sus */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '22%',
+          right: '5%',
+          animation: 'rotateAndFloat2 38s linear infinite',
+          filter: 'invert(52%) sepia(87%) saturate(420%) hue-rotate(85deg) brightness(110%) drop-shadow(0 0 15px rgba(34,197,94,0.25))',
+          opacity: 0.2,
+        }}
+      >
+        <Image
+          src="/cannabis.svg"
+          alt="cannabis leaf"
+          width={180}
+          height={180}
+          priority
+        />
+      </div>
+
+      {/* Frunză 3 - Dreapta jos */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '8%',
+          animation: 'rotateAndFloat1 45s linear infinite reverse',
+          filter: 'invert(52%) sepia(87%) saturate(420%) hue-rotate(85deg) brightness(110%) drop-shadow(0 0 20px rgba(34,197,94,0.35))',
+          opacity: 0.22,
+        }}
+      >
+        <Image
+          src="/cannabis.svg"
+          alt="cannabis leaf"
+          width={260}
+          height={260}
+        />
+      </div>
+    </div>
+  );
+}
+
 // ─── components ──────────────────────────────────────────────────────────────
-
-
 
 function Hero() {
   const typedWord = useTypingEffect(TYPED_WORDS, 85, 50, 1900);
@@ -89,6 +162,20 @@ function Hero() {
       />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* Subtil 420 Indicator */}
+        <div
+          style={{
+            ...mono,
+            fontSize: '12px',
+            color: ACCENT,
+            opacity: 0.6,
+            letterSpacing: '0.15em',
+            marginBottom: '16px',
+          }}
+        >
+          [ 420 SYSTEM ]
+        </div>
+
         <div
           style={{
             ...mono,
@@ -331,7 +418,6 @@ function Projects() {
         ))}
       </div>
 
-      {/* more projects soon */}
       <p
         style={{
           ...mono,
@@ -495,7 +581,7 @@ function Contact() {
         >
           →
         </span>
-        @nexo
+        @nexo.7x
       </a>
 
       <p
@@ -520,6 +606,8 @@ function Footer() {
         padding: '40px 24px',
         maxWidth: '860px',
         margin: '0 auto',
+        position: 'relative',
+        zIndex: 1,
       }}
     >
       <div
@@ -538,7 +626,7 @@ function Footer() {
         }}
       >
         <span style={{ ...mono, color: TEXT_SECONDARY, fontSize: '14px', letterSpacing: '0.06em' }}>
-          nexo © 2026
+          nexo © 2026 // 4:20
         </span>
         <span
           style={{
@@ -574,6 +662,19 @@ export default function Home() {
           0%, 100% { opacity: 0.3; transform: scaleY(1); }
           50%       { opacity: 0.6; transform: scaleY(1.15); }
         }
+
+        /* Rotire continuă și plutire ușoară pentru SVG-ul tău */
+        @keyframes rotateAndFloat1 {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-25px) rotate(180deg); }
+          100% { transform: translateY(0px) rotate(360deg); }
+        }
+        @keyframes rotateAndFloat2 {
+          0% { transform: translateY(0px) rotate(360deg); }
+          50% { transform: translateY(30px) rotate(180deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+
         html { scroll-behavior: smooth; }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         ::selection { background: rgba(34,197,94,0.22); color: #e5e7eb; }
@@ -589,11 +690,14 @@ export default function Home() {
           minHeight: '100vh',
           fontFamily: "'Inter', sans-serif",
           overflowX: 'hidden',
+          position: 'relative',
         }}
       >
-       
-        <Hero />
-        <div style={{ width: '100%' }}>
+        {/* Fundalul fixat cu frunzele din public/cannabis.svg */}
+        <FloatingLeavesBackground />
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <Hero />
           <Projects />
           <About />
           <Contact />

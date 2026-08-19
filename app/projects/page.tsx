@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import  Link  from "next/link";
+import Link from "next/link";
+import Image from "next/image";
 
 const TYPING_WORDS = ["projects.", "systems.", "work.", "tellnex.", "reznex.", "iot.", "tools."];
-
-
 
 function useTypingAnimation(words: string[]) {
   const [displayText, setDisplayText] = useState("");
@@ -15,13 +14,11 @@ function useTypingAnimation(words: string[]) {
   const [cursorVisible, setCursorVisible] = useState(true);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Blinking cursor
   useEffect(() => {
     const interval = setInterval(() => setCursorVisible((v) => !v), 530);
     return () => clearInterval(interval);
   }, []);
 
-  // Typing logic
   useEffect(() => {
     const currentWord = words[wordIndex];
     const speed = isDeleting ? 60 : 110;
@@ -63,7 +60,6 @@ const fadeUp = {
   }
 };
 
-// Terminal data pentru Tellnex[cite: 3]
 const tellnexTerminal = [
   {
     cmd: "$ stack",
@@ -84,11 +80,18 @@ const tellnexTerminal = [
   },
 ];
 
-// Terminal data pentru Reznex[cite: 3]
 const reznexTerminal = [
   {
     cmd: "$ stack",
     lines: ["next.js 14", "supabase (db, auth, storage)", "tailwind css", "postgresql"],
+  },
+  {
+    cmd: "$ electronics ai [NOU]",
+    lines: [
+      "asistent ai inteligent si dedicat electronicii",
+      "depanare circuite, scheme si microcontrollere",
+      "acces 100% gratuit",
+    ],
   },
   {
     cmd: "$ hardware docs",
@@ -99,15 +102,61 @@ const reznexTerminal = [
       "cloner-ready source code integration",
     ],
   },
-  {
-    cmd: "$ infrastructure",
-    lines: [
-      "slug-based clean routing",
-      "automated malware / virus checking on file uploads",
-      "rls security policies",
-    ],
-  },
 ];
+
+function FloatingLeavesBackground() {
+  return (
+    <div
+      aria-hidden
+      style={{
+        position: 'fixed',
+        inset: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+        zIndex: 0,
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          top: '15%',
+          left: '3%',
+          animation: 'rotateAndFloat1 32s linear infinite',
+          filter: 'invert(52%) sepia(87%) saturate(420%) hue-rotate(85deg) brightness(110%) drop-shadow(0 0 15px rgba(34,197,94,0.3))',
+          opacity: 0.18,
+        }}
+      >
+        <Image src="/cannabis.svg" alt="" width={220} height={220} priority />
+      </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          top: '45%',
+          right: '4%',
+          animation: 'rotateAndFloat2 40s linear infinite',
+          filter: 'invert(52%) sepia(87%) saturate(420%) hue-rotate(85deg) brightness(110%) drop-shadow(0 0 15px rgba(34,197,94,0.25))',
+          opacity: 0.15,
+        }}
+      >
+        <Image src="/cannabis.svg" alt="" width={200} height={200} priority />
+      </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          left: '6%',
+          animation: 'rotateAndFloat1 48s linear infinite reverse',
+          filter: 'invert(52%) sepia(87%) saturate(420%) hue-rotate(85deg) brightness(110%) drop-shadow(0 0 20px rgba(34,197,94,0.35))',
+          opacity: 0.2,
+        }}
+      >
+        <Image src="/cannabis.svg" alt="" width={260} height={260} />
+      </div>
+    </div>
+  );
+}
 
 export default function ProjectsPage() {
   const { displayText, cursorVisible } = useTypingAnimation(TYPING_WORDS);
@@ -119,653 +168,665 @@ export default function ProjectsPage() {
         background: "#111315",
         color: "#e5e7eb",
         fontFamily: "'Inter', sans-serif",
+        position: "relative",
       }}
     >
-      {/* ── HERO ───────────────────────────────────── */}
-      <section
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "8rem 2rem 4rem",
-          textAlign: "center",
-        }}
-      >
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
+      <FloatingLeavesBackground />
+
+      <div style={{ position: "relative", zIndex: 1 }}>
+        {/* ── HERO ───────────────────────────────────── */}
+        <section
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "8rem 2rem 4rem",
+            textAlign: "center",
+          }}
         >
-          <p
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0.1}>
+            <div
+              style={{
+                fontFamily: "'VT323', monospace",
+                fontSize: "13px",
+                color: "#22c55e",
+                opacity: 0.6,
+                letterSpacing: "0.15em",
+                marginBottom: "16px",
+              }}
+            >
+              [ 420 SYSTEM ]
+            </div>
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.72rem",
+                letterSpacing: "0.22em",
+                color: "#22c55e",
+                marginBottom: "2rem",
+                opacity: 0.85,
+              }}
+            >
+              // projects
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.2}
+            style={{ lineHeight: 1.08 }}
+          >
+            <h1
+              style={{
+                fontFamily: "'VT323', monospace",
+                fontSize: "clamp(4rem, 12vw, 9rem)",
+                color: "#e5e7eb",
+                margin: 0,
+                letterSpacing: "0.02em",
+                display: "block",
+              }}
+            >
+              nexo
+            </h1>
+            <h2
+              style={{
+                fontFamily: "'VT323', monospace",
+                fontSize: "clamp(3rem, 9vw, 7rem)",
+                color: "#9ca3af",
+                margin: 0,
+                letterSpacing: "0.02em",
+                fontWeight: 400,
+              }}
+            >
+              builds the
+            </h2>
+            <h2
+              style={{
+                fontFamily: "'VT323', monospace",
+                fontSize: "clamp(3rem, 9vw, 7rem)",
+                color: "#22c55e",
+                margin: 0,
+                letterSpacing: "0.02em",
+                fontWeight: 400,
+                minHeight: "1.1em",
+              }}
+            >
+              {displayText}
+              <span
+                style={{
+                  opacity: cursorVisible ? 1 : 0,
+                  transition: "opacity 0.1s",
+                  color: "#22c55e",
+                }}
+              >
+                _
+              </span>
+            </h2>
+          </motion.div>
+
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.5}
+            style={{
+              marginTop: "2.5rem",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.8rem",
+              letterSpacing: "0.18em",
+              color: "#6b7280",
+              textTransform: "lowercase",
+            }}
+          >
+            proiecte concepute si construite de la zero. de la inteligenta artificiala la hardware.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
+            style={{ marginTop: "5rem" }}
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              style={{ color: "#374151", fontSize: "1.1rem", letterSpacing: "0.05em" }}
+            >
+              ↓
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* ── PROJECT 001: TELLNEX ───────────────────── */}
+        <section
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            padding: "6rem 2rem 4rem",
+          }}
+        >
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "0.72rem",
-              letterSpacing: "0.22em",
+              letterSpacing: "0.2em",
               color: "#22c55e",
-              marginBottom: "2rem",
-              opacity: 0.85,
+              opacity: 0.7,
+              marginBottom: "1.5rem",
             }}
           >
-            // projects
-          </p>
-        </motion.div>
+            // 001 — project
+          </motion.p>
 
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.2}
-          style={{ lineHeight: 1.08 }}
-        >
-          <h1
+          <motion.h2
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.1}
             style={{
               fontFamily: "'VT323', monospace",
-              fontSize: "clamp(4rem, 12vw, 9rem)",
+              fontSize: "clamp(3.5rem, 10vw, 7rem)",
               color: "#e5e7eb",
-              margin: 0,
-              letterSpacing: "0.02em",
-              display: "block",
+              margin: "0 0 0.5rem 0",
+              letterSpacing: "0.04em",
+              lineHeight: 1,
             }}
           >
-            nexo
-          </h1>
-          <h2
+            tellnex
+          </motion.h2>
+
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.18}
             style={{
-              fontFamily: "'VT323', monospace",
-              fontSize: "clamp(3rem, 9vw, 7rem)",
-              color: "#9ca3af",
-              margin: 0,
-              letterSpacing: "0.02em",
-              fontWeight: 400,
-            }}
-          >
-            builds the
-          </h2>
-          <h2
-            style={{
-              fontFamily: "'VT323', monospace",
-              fontSize: "clamp(3rem, 9vw, 7rem)",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.85rem",
+              letterSpacing: "0.14em",
               color: "#22c55e",
-              margin: 0,
-              letterSpacing: "0.02em",
-              fontWeight: 400,
-              minHeight: "1.1em",
+              marginBottom: "2.5rem",
             }}
           >
-            {displayText}
+            conversational ai system.
+          </motion.p>
+
+          <motion.div
+            initial={{ scaleX: 0, originX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              height: "1px",
+              background: "linear-gradient(90deg, rgba(34,197,94,0.3), transparent)",
+              marginBottom: "2.5rem",
+            }}
+          />
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "3rem",
+              alignItems: "start",
+            }}
+            className="project-grid"
+          >
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.25}
+            >
+              <p
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.9rem",
+                  lineHeight: 1.8,
+                  color: "#9ca3af",
+                  margin: 0,
+                }}
+              >
+                tellnex este un asistent AI conversațional creat pentru interacțiuni rapide.
+                axat pe automatizare și răspunsuri inteligente, gândit să fie ușor de integrat în orice flux de lucru.
+              </p>
+
+              <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                {[
+                  "// status: active.",
+                  "// continuously evolving.",
+                  "// version: v1.0",
+                ].map((line, i) => (
+                  <motion.p
+                    key={i}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    custom={0.3 + i * 0.08}
+                    style={{
+                      fontFamily: "'VT323', monospace",
+                      fontSize: "1rem",
+                      color: "#22c55e",
+                      opacity: 0.4,
+                      margin: 0,
+                      letterSpacing: "0.06em",
+                    }}
+                  >
+                    {line}
+                  </motion.p>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.3}
+              style={{
+                background: "#16181c",
+                border: "1px solid rgba(255,255,255,0.06)",
+                borderRadius: "8px",
+                padding: "1.75rem 2rem",
+                fontFamily: "'VT323', monospace",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.2)",
+              }}
+            >
+              {tellnexTerminal.map((block, bi) => (
+                <div key={bi} style={{ marginBottom: bi < tellnexTerminal.length - 1 ? "1.5rem" : 0 }}>
+                  <p
+                    style={{
+                      margin: "0 0 0.4rem 0",
+                      color: "#22c55e",
+                      fontSize: "1.1rem",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {block.cmd}
+                  </p>
+                  {block.lines.map((line, li) => (
+                    <p
+                      key={li}
+                      style={{
+                        margin: "0 0 0.2rem 1.25rem",
+                        color: "#9ca3af",
+                        fontSize: "1rem",
+                        letterSpacing: "0.04em",
+                      }}
+                    >
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.4}
+            style={{
+              marginTop: "4rem",
+              display: "flex",
+              gap: "1.2rem",
+              flexWrap: "wrap",
+            }}
+          >
+            <a
+              href="https://tellnex.site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              → view project
+            </a>
+          </motion.div>
+        </section>
+
+        {/* ── PROJECT 002: REZNEX ───────────────────── */}
+        <section
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            padding: "4rem 2rem 6rem",
+            borderTop: "1px solid rgba(255,255,255,0.06)"
+          }}
+        >
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.72rem",
+              letterSpacing: "0.2em",
+              color: "#22c55e",
+              opacity: 0.7,
+              marginBottom: "1.5rem",
+            }}
+          >
+            // 002 — project
+          </motion.p>
+
+          {/* Project Header cu Badge "NOU" */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.1}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+              marginBottom: "0.5rem",
+              flexWrap: "wrap",
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: "'VT323', monospace",
+                fontSize: "clamp(3.5rem, 10vw, 7rem)",
+                color: "#e5e7eb",
+                margin: 0,
+                letterSpacing: "0.04em",
+                lineHeight: 1,
+              }}
+            >
+              reznex
+            </h2>
+
             <span
               style={{
-                opacity: cursorVisible ? 1 : 0,
-                transition: "opacity 0.1s",
-                color: "#22c55e",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                letterSpacing: "0.14em",
+                color: "#111315",
+                background: "#22c55e",
+                padding: "4px 10px",
+                borderRadius: "4px",
+                textTransform: "uppercase",
+                boxShadow: "0 0 16px rgba(34,197,94,0.45)",
               }}
             >
-              _
+              NOU
             </span>
-          </h2>
-        </motion.div>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0.5}
-          style={{
-            marginTop: "2.5rem",
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.8rem",
-            letterSpacing: "0.18em",
-            color: "#4b5563",
-            textTransform: "lowercase",
-          }}
-        >
-          proiecte concepute si construite de la zero. de la inteligenta artificiala la hardware.
-        </motion.p>
-
-        {/* Scroll nudge */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
-          style={{ marginTop: "5rem" }}
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            style={{ color: "#374151", fontSize: "1.1rem", letterSpacing: "0.05em" }}
-          >
-            ↓
           </motion.div>
-        </motion.div>
-      </section>
 
-      {/* ── PROJECT 001: TELLNEX ───────────────────── */}
-      <section
-        style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-          padding: "6rem 2rem 4rem",
-        }}
-      >
-        {/* Label */}
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0}
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.72rem",
-            letterSpacing: "0.2em",
-            color: "#22c55e",
-            opacity: 0.7,
-            marginBottom: "1.5rem",
-          }}
-        >
-          // 001 — project
-        </motion.p>
-
-        {/* Project title */}
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.1}
-          style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: "clamp(3.5rem, 10vw, 7rem)",
-            color: "#e5e7eb",
-            margin: "0 0 0.5rem 0",
-            letterSpacing: "0.04em",
-            lineHeight: 1,
-          }}
-        >
-          tellnex
-        </motion.h2>
-
-        {/* Tagline */}
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.18}
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.85rem",
-            letterSpacing: "0.14em",
-            color: "#22c55e",
-            marginBottom: "2.5rem",
-          }}
-        >
-          conversational ai system.
-        </motion.p>
-
-        {/* Divider */}
-        <motion.div
-          initial={{ scaleX: 0, originX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            height: "1px",
-            background: "linear-gradient(90deg, #22c55e22, transparent)",
-            marginBottom: "2.5rem",
-          }}
-        />
-
-        {/* Description + Terminal grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "3rem",
-            alignItems: "start",
-          }}
-          className="project-grid"
-        >
-          {/* Description */}
-          <motion.div
+          <motion.p
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            custom={0.25}
-          >
-            <p
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.9rem",
-                lineHeight: 1.8,
-                color: "#9ca3af",
-                margin: 0,
-              }}
-            >
-              tellnex is an ai-powered conversational system built for real-time interaction.
-              it focuses on automation and scalable communication designed to integrate
-              seamlessly into modern digital products and infrastructure. 
-              mai pe scurt. un AI pe care il intrebi si iti raspunde.
-            </p>
-
-            {/* Status lines */}
-            <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
-              {[
-                "// status: active.",
-                "// continuously evolving.",
-                "// version: v1.0",
-              ].map((line, i) => (
-                <motion.p
-                  key={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  custom={0.3 + i * 0.08}
-                  style={{
-                    fontFamily: "'VT323', monospace",
-                    fontSize: "1rem",
-                    color: "#22c55e",
-                    opacity: 0.35,
-                    margin: 0,
-                    letterSpacing: "0.06em",
-                  }}
-                >
-                  {line}
-                </motion.p>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Terminal block */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0.3}
+            custom={0.18}
             style={{
-              background: "#0d0f10",
-              border: "1px solid rgba(34,197,94,0.12)",
-              borderRadius: "6px",
-              padding: "1.75rem 2rem",
-              fontFamily: "'VT323', monospace",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.85rem",
+              letterSpacing: "0.14em",
+              color: "#22c55e",
+              marginBottom: "2.5rem",
             }}
           >
-            {tellnexTerminal.map((block, bi) => (
-              <div key={bi} style={{ marginBottom: bi < tellnexTerminal.length - 1 ? "1.5rem" : 0 }}>
-                <p
-                  style={{
-                    margin: "0 0 0.4rem 0",
-                    color: "#22c55e",
-                    fontSize: "1.1rem",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  {block.cmd}
-                </p>
-                {block.lines.map((line, li) => (
-                  <p
-                    key={li}
+            hardware, iot hub & smart electronics ai.
+          </motion.p>
+
+          <motion.div
+            initial={{ scaleX: 0, originX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              height: "1px",
+              background: "linear-gradient(90deg, rgba(34,197,94,0.3), transparent)",
+              marginBottom: "2.5rem",
+            }}
+          />
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "3rem",
+              alignItems: "start",
+            }}
+            className="project-grid"
+          >
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.25}
+            >
+              <p
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.9rem",
+                  lineHeight: 1.8,
+                  color: "#9ca3af",
+                  margin: 0,
+                }}
+              >
+                hub și comunitate pentru pasionații de electronică și embedded. include acum și un <strong style={{ color: "#e5e7eb" }}>AI inteligent integrat</strong>, specializat pe electronică, depanare de scheme hardware și microcontrollere, complet <strong style={{ color: "#22c55e" }}>gratuit</strong>. oferă găzduire de proiecte IoT, liste de componente interactive și cod sursă direct accesibil.
+              </p>
+
+              <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                {[
+                  "// status: fully operational.",
+                  "// electronics ai integrated (100% free).",
+                  "// version: v1.2.0",
+                ].map((line, i) => (
+                  <motion.p
+                    key={i}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    custom={0.3 + i * 0.08}
                     style={{
-                      margin: "0 0 0.2rem 1.25rem",
-                      color: "#6b7280",
+                      fontFamily: "'VT323', monospace",
                       fontSize: "1rem",
-                      letterSpacing: "0.04em",
+                      color: "#22c55e",
+                      opacity: 0.4,
+                      margin: 0,
+                      letterSpacing: "0.06em",
                     }}
                   >
                     {line}
-                  </p>
+                  </motion.p>
                 ))}
               </div>
-            ))}
-          </motion.div>
-        </div>
+            </motion.div>
 
-        {/* Action Buttons */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.4}
-          style={{
-            marginTop: "4rem",
-            display: "flex",
-            gap: "1.5rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <a
-            href="https://tellnex.site/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.8rem",
-              letterSpacing: "0.14em",
-              color: "#111315",
-              background: "#22c55e",
-              padding: "0.8rem 2rem",
-              textDecoration: "none",
-              borderRadius: "3px",
-              transition: "opacity 0.2s ease, transform 0.2s ease",
-              display: "inline-block",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "0.85";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "1";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-            }}
-          >
-            → view project
-          </a>
-        </motion.div>
-      </section>
-
-      {/* ── PROJECT 002: REZNEX ───────────────────── */}
-      <section
-        style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-          padding: "4rem 2rem 6rem",
-          borderTop: "1px solid rgba(255,255,255,0.03)"
-        }}
-      >
-        {/* Label */}
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0}
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.72rem",
-            letterSpacing: "0.2em",
-            color: "#22c55e",
-            opacity: 0.7,
-            marginBottom: "1.5rem",
-          }}
-        >
-          // 002 — project
-        </motion.p>
-
-        {/* Project title */}
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.1}
-          style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: "clamp(3.5rem, 10vw, 7rem)",
-            color: "#e5e7eb",
-            margin: "0 0 0.5rem 0",
-            letterSpacing: "0.04em",
-            lineHeight: 1,
-          }}
-        >
-          reznex
-        </motion.h2>
-
-        {/* Tagline */}
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.18}
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.85rem",
-            letterSpacing: "0.14em",
-            color: "#22c55e",
-            marginBottom: "2.5rem",
-          }}
-        >
-          hardware & iot collaboration hub.
-        </motion.p>
-
-        {/* Divider */}
-        <motion.div
-          initial={{ scaleX: 0, originX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            height: "1px",
-            background: "linear-gradient(90deg, #22c55e22, transparent)",
-            marginBottom: "2.5rem",
-          }}
-        />
-
-        {/* Description + Terminal grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "3rem",
-            alignItems: "start",
-          }}
-          className="project-grid"
-        >
-          {/* Description */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0.25}
-          >
-            <p
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.3}
               style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.9rem",
-                lineHeight: 1.8,
-                color: "#9ca3af",
-                margin: 0,
+                background: "#16181c",
+                border: "1px solid rgba(34,197,94,0.18)",
+                borderRadius: "8px",
+                padding: "1.75rem 2rem",
+                fontFamily: "'VT323', monospace",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.2)",
               }}
             >
-              reznex is a modern portal designed as an open-source hub for physical computing
-              enthusiasts, makers, and electronic engineers in romania. it allows users to discover,
-              document, and share projects based on arduino, esp32, or stm32.
-              features deep technical indexing, dynamic bill of materials (bom), secure scheme uploads, 
-              and direct assembly code integrations.
-            </p>
-
-            {/* Status lines */}
-            <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
-              {[
-                "// status: fully operational.",
-                "// slug routing database active.",
-                "// version: v1.1.4",
-              ].map((line, i) => (
-                <motion.p
-                  key={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  custom={0.3 + i * 0.08}
-                  style={{
-                    fontFamily: "'VT323', monospace",
-                    fontSize: "1rem",
-                    color: "#22c55e",
-                    opacity: 0.35,
-                    margin: 0,
-                    letterSpacing: "0.06em",
-                  }}
-                >
-                  {line}
-                </motion.p>
+              {reznexTerminal.map((block, bi) => (
+                <div key={bi} style={{ marginBottom: bi < reznexTerminal.length - 1 ? "1.5rem" : 0 }}>
+                  <p
+                    style={{
+                      margin: "0 0 0.4rem 0",
+                      color: "#22c55e",
+                      fontSize: "1.1rem",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {block.cmd}
+                  </p>
+                  {block.lines.map((line, li) => (
+                    <p
+                      key={li}
+                      style={{
+                        margin: "0 0 0.2rem 1.25rem",
+                        color: "#9ca3af",
+                        fontSize: "1rem",
+                        letterSpacing: "0.04em",
+                      }}
+                    >
+                      {line}
+                    </p>
+                  ))}
+                </div>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Terminal block */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            custom={0.3}
+            custom={0.4}
             style={{
-              background: "#0d0f10",
-              border: "1px solid rgba(34,197,94,0.12)",
-              borderRadius: "6px",
-              padding: "1.75rem 2rem",
-              fontFamily: "'VT323', monospace",
+              marginTop: "4rem",
+              display: "flex",
+              gap: "1.2rem",
+              flexWrap: "wrap",
             }}
           >
-            {reznexTerminal.map((block, bi) => (
-              <div key={bi} style={{ marginBottom: bi < reznexTerminal.length - 1 ? "1.5rem" : 0 }}>
-                <p
-                  style={{
-                    margin: "0 0 0.4rem 0",
-                    color: "#22c55e",
-                    fontSize: "1.1rem",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  {block.cmd}
-                </p>
-                {block.lines.map((line, li) => (
-                  <p
-                    key={li}
-                    style={{
-                      margin: "0 0 0.2rem 1.25rem",
-                      color: "#6b7280",
-                      fontSize: "1rem",
-                      letterSpacing: "0.04em",
-                    }}
-                  >
-                    {line}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </motion.div>
-        </div>
+            <a
+              href="https://reznex.ro/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              → view project
+            </a>
 
-        {/* Action Buttons */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.4}
+            <Link href="/contact" className="btn-secondary">
+              → contact
+            </Link>
+          </motion.div>
+        </section>
+
+        {/* ── FOOTER ─────────────────────────────────── */}
+        <footer
           style={{
-            marginTop: "4rem",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            maxWidth: "900px",
+            margin: "0 auto",
+            padding: "2.5rem 2rem",
             display: "flex",
-            gap: "1.5rem",
+            justifyContent: "space-between",
+            alignItems: "center",
             flexWrap: "wrap",
+            gap: "0.5rem",
           }}
         >
-          <a
-            href="https://reznex.ro/" 
-            target="_blank"
-            rel="noopener noreferrer"
+          <span
             style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.8rem",
-              letterSpacing: "0.14em",
-              color: "#111315",
-              background: "#22c55e",
-              padding: "0.8rem 2rem",
-              textDecoration: "none",
-              borderRadius: "3px",
-              transition: "opacity 0.2s ease, transform 0.2s ease",
-              display: "inline-block",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "0.85";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "1";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-            }}
-          >
-            → view project
-          </a>
-
-          <Link
-            href="/contact"
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.8rem",
-              letterSpacing: "0.14em",
+              fontFamily: "'VT323', monospace",
+              fontSize: "1.1rem",
               color: "#9ca3af",
-              background: "transparent",
-              border: "1px solid rgba(156,163,175,0.25)",
-              padding: "0.8rem 2rem",
-              textDecoration: "none",
-              borderRadius: "3px",
-              transition: "border-color 0.2s ease, color 0.2s ease, transform 0.2s ease",
-              display: "inline-block",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "#22c55e";
-              (e.currentTarget as HTMLElement).style.color = "#22c55e";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(156,163,175,0.25)";
-              (e.currentTarget as HTMLElement).style.color = "#9ca3af";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+              letterSpacing: "0.06em",
             }}
           >
-            → contact
-          </Link>
-        </motion.div>
-      </section>
-
-      {/* ── FOOTER ─────────────────────────────────── */}
-      <footer
-        style={{
-          borderTop: "1px solid rgba(34,197,94,0.08)",
-          maxWidth: "900px",
-          margin: "0 auto",
-          padding: "2.5rem 2rem",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "0.5rem",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: "1.1rem",
-            color: "#374151",
-            letterSpacing: "0.06em",
-          }}
-        >
-          nexo © 2026
-        </span>
-        <span
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.72rem",
-            letterSpacing: "0.16em",
-            color: "#374151",
-          }}
-        >
-          nexo label.
-        </span>
-      </footer>
+            nexo © 2026 // 4:20
+          </span>
+          <span
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.72rem",
+              letterSpacing: "0.16em",
+              color: "#4b5563",
+            }}
+          >
+            nexo label.
+          </span>
+        </footer>
+      </div>
 
       <style>{`
+        @keyframes rotateAndFloat1 {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-25px) rotate(180deg); }
+          100% { transform: translateY(0px) rotate(360deg); }
+        }
+        @keyframes rotateAndFloat2 {
+          0% { transform: translateY(0px) rotate(360deg); }
+          50% { transform: translateY(30px) rotate(180deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .btn-primary {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.8rem;
+          letter-spacing: 0.12em;
+          color: #111315;
+          background: #22c55e;
+          border: 1px solid #22c55e;
+          padding: 0.85rem 2rem;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 500;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.25s ease;
+          box-shadow: 0 0 20px rgba(34,197,94,0.2);
+        }
+        .btn-primary:hover {
+          background: #1ea34d;
+          border-color: #1ea34d;
+          transform: translateY(-2px);
+          box-shadow: 0 0 28px rgba(34,197,94,0.4);
+        }
+
+        .btn-secondary {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.8rem;
+          letter-spacing: 0.12em;
+          color: #e5e7eb;
+          background: #16181c;
+          border: 1px solid rgba(255,255,255,0.08);
+          padding: 0.85rem 2rem;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 500;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.25s ease;
+        }
+        .btn-secondary:hover {
+          border-color: rgba(34,197,94,0.4);
+          color: #22c55e;
+          transform: translateY(-2px);
+          box-shadow: 0 0 20px rgba(34,197,94,0.12);
+        }
+
         @media (max-width: 680px) {
           .project-grid {
             grid-template-columns: 1fr !important;
